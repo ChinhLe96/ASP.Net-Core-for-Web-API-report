@@ -98,3 +98,19 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
   + IHostingEnvironment lưu trữ thông tin về môi trường lưu trữ hiện tại.
   + ILoggerFactory cho phép  thiết lập và thêm các nhà cung cấp đăng nhập.
 
+# 4. Routing và các đặt tên route trong ASP.Net Core của Web API
+
+- Web API Routing rất giống với MVC Routing. Sự khác biệt chính là Web API sử dụng phương pháp HTTP chứ không phải đường dẫn URI để chọn hành động.
+- Routing Tables: 
+  + Đối với mỗi thông điệp HTTP, ASP.NET Web API sẽ xác định controller nào sẽ nhận request bằng cách tham khảo bảng định tuyến (routing table)
+  + Khi tạo một dự án Web API, dự án sẽ tạo ra một tuyến mặc định có dạng như sau:
+   ```/api/{controller}/{id}```
+  Trong đó {controller} chính là tên của Controller,  phương thức HTTP (GET / POST/ PUT /DELETE) chính là tên của phương thức của controller và {id} sẽ là giá trị gởi lên của tham số có tên là id.
+  Ví dụ:
+  
+| HTTP Method | URI | Action|
+|--------------|-------|------|
+| GET |/api/products | GetAllProducts() | 2 x 3 |
+| GET |	/api/products/5 | GetProduct(5) | 3 x 3 |
+| POST |/api/products/ | HTTP Status 405 | 4 x 3 |
+| GET |/api/users/ | HTTP Status 404 | 5 x 3 |
