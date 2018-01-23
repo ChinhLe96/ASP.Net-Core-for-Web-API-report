@@ -58,3 +58,43 @@ namespace TodoApi.Controllers
 }
 ```
    + Bước 3: Thêm các phương thức GET, PUT, PUSH, DELETE,..vào controller vừa tạo và sử dụng nó.
+   
+# 3. Giới thiệu về file startup.cs trong ASP.Net Core của Web API
+- File Startup.cs là một cách nâng cao để khởi động ứng dụng của bạn, và bây giờ là một phần không thể tách rời của ASP.NET Core
+- File Startup.cs sẽ có dạng:
+![startup](https://user-images.githubusercontent.com/35052781/35292232-77ac0bb2-00a2-11e8-80f8-06884fea2812.png)
+
+- Lớp Startup có 2 phương thức đáng chú ý (ngoài constructor), là Configure() và ConfigureServices(), cả 2 phương thức này đều có thể sử dụng được một vài service có sẵn lúc khởi động, thông qua Dependency Injection(DI là một dịch vụ của Framework đảm bảo việc cung cấp các thành phần phụ thuộc khi cần thiết)
++ ConfigureServices(): thêm các dịch vụ vào container DI và có mã mặc định sẽ như sau:
+```
+// This method gets called by the runtime. Use this method to add services to the container.
+public void ConfigureServices(IServiceCollection services)
+{
+    // Add framework services.
+    services.AddMvc();
+}
+```
++ Configure(): cho phép chúng ta thêm middleware và dịch vụ vào đường ống HTTP.
+```
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
+{
+    loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+    loggerFactory.AddDebug();
+
+    if (env.IsDevelopment())
+    {
+        app.UseBrowserLink();
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Home/Error");
+    }
+    ...
+}
+```
+  Lưu ý ba tham số:
+  + IApplicationBuilder cho phép thêm các dịch vụ vào đường ống cho ứng dụng này.
+  + IHostingEnvironment lưu trữ thông tin về môi trường lưu trữ hiện tại.
+  + ILoggerFactory cho phép  thiết lập và thêm các nhà cung cấp đăng nhập.
+
