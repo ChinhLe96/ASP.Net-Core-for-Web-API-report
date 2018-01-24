@@ -178,10 +178,10 @@ Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phé
 Kiến trúc của Entity Framework được minh họa như sau:<br><br>
   <img src="https://i.imgur.com/h94vJqK.png"><br><br>
 Đây là các class tự động sinh ra tương ứng với mô hình dữ liệu. Các class này bao gồm:<br>
-+ <h4>ObjectContext</h4> đại diện cho một database. ObjectContext có chức năng quản lý các kết nối, định nghĩa mô hình dữ liệu với metadata và thao tác với database. Lớp này cũng có thể thêm vào các phương thức đại diện cho các stored procedure trong database.<br>
-+ <h4>ObjectSet<TEntity></h4> là một  một tập hợp các entity. Mỗi đối tượng này tương ứng với một table. Có thể lấy được các đối tượng này thông qua các property tương ứng của ObjectContext.<br>
-+ <h4>EntityObject, ComplexObject</h4> là các lớp tương ứng cho một dòng dữ liệu của table trong database. Khác biệt chính giữa hai loại này là ComplexObject không chứa primary key.<br>
-+ <h4>EntityCollection<TEntity> và EntityReference<TEntity>:</h4> là các đối tượng thể hiện mối quan hệ (relationship) giữa hai entity class. Mỗi đối tượng này có thể được truy xuất thông qua các property của entity class.<br>
++ ObjectContext đại diện cho một database. ObjectContext có chức năng quản lý các kết nối, định nghĩa mô hình dữ liệu với metadata và thao tác với database. Lớp này cũng có thể thêm vào các phương thức đại diện cho các stored procedure trong database.<br>
++ ObjectSet<TEntity>là một  một tập hợp các entity. Mỗi đối tượng này tương ứng với một table. Có thể lấy được các đối tượng này thông qua các property tương ứng của ObjectContext.<br>
++ EntityObject, ComplexObject là các lớp tương ứng cho một dòng dữ liệu của table trong database. Khác biệt chính giữa hai loại này là ComplexObject không chứa primary key.<br>
++ EntityCollection<TEntity> và EntityReference<TEntity>: là các đối tượng thể hiện mối quan hệ (relationship) giữa hai entity class. Mỗi đối tượng này có thể được truy xuất thông qua các property của entity class.<br>
 Để làm việc với Entity Framework một cách hoàn chỉnh chúng ta phải cài thêm Entity Framework bản mới nhất từ NuGet:<br>
 B1. Tạo Project mới<br>
 B2. Cài EF Power Tools vào Visual Studio: Tools -> Library Paskage Manager -> Manage NuGet Packages for Solution…<br><br>
@@ -201,62 +201,63 @@ Chuột phải vào Project > Add > New Folder<br><br>
 Tiếp tục chuột phải vào Folder Models > Add > Class, đặt tên class là TodoItem > Ok<br><br>
 <img src="https://i.imgur.com/jKu1HYT.png"><br><br>
 Thêm 3 Property vô<br>
-`public string Key { get; set; }`<br>
-`public string Name { get; set; }`<br>
-`public bool IsComplete { get; set; }`<br>
+```public string Key { get; set; }
+   public string Name { get; set; }
+   public bool IsComplete { get; set; }
+```
 <h4>Thêm Repository</h4>
 Repository dùng để đóng gói data, và chứa logic cho việc truy cập dữ liệu và chuyển nó qua cho Entity Model.<br>
 Để bắt đầu, chúng ta sẽ tạo một repository interface có tên ITodoRepository, dùng cách thêm class như trên, nhưng chọn template là Interface<br><br>
 namespace todoapi.Models<br>
-`{`<br>
-   ` public interface ITodoRepository`<br>
-    `{`<br>
-      ` void Add(TodoItem item);`<br>
-      `IEnumerable<TodoItem> GetAll();`<br>
-      ` TodoItem Find(string key);`<br>
-      `TodoItem Remove(string key);`<br>
-      ` void Update(TodoItem item);`<br>
-   ` }`<br>
-`}`<br><br>
+```{
+    public interface ITodoRepository
+    {
+      void Add(TodoItem item);
+      IEnumerable<TodoItem> GetAll();
+       TodoItem Find(string key);
+      TodoItem Remove(string key);
+       void Update(TodoItem item);
+    }
+}
+```
 interface này định nghĩa các phương thức CRUD (Create – Read – Update – Delete)<br>
 Tiếp theo, ta thêm class TodoRepository, triển khai các phương thức trong Interface mới tạo bên trên<br><br>
- `public class TodoRepository : ITodoRepository `<br>
- `{ `<br>
-  `private static ConcurrentDictionary<string, TodoItem> _todos = new ConcurrentDictionary<string, TodoItem>(); <br>`
-     `public TodoRepository() `<br>
-    ` { `<br>
-        ` Add(new TodoItem { Name = "Item1" }); `<br>
-     `} public void Add(TodoItem item) `<br>
-     `{ `<br>
-         `item.Key = Guid.NewGuid().ToString(); `<br>
-         `_todos[item.Key] = item; `<br>
-     `} `<br>
+ ```public class TodoRepository : ITodoRepository 
+ { 
+  private static ConcurrentDictionary<string, TodoItem> _todos = new ConcurrentDictionary<string, TodoItem>(); 
+     public TodoRepository() 
+     { 
+         Add(new TodoItem { Name = "Item1" }); 
+     } public void Add(TodoItem item) 
+     { 
+         item.Key = Guid.NewGuid().ToString(); 
+         _todos[item.Key] = item; 
+     } 
+     public IEnumerable<TodoItem> GetAll() 
+     { 
+         return _todos.Values;
+     } 
  
-     `public IEnumerable<TodoItem> GetAll() `<br>
-     `{ `<br>
-         `return _todos.Values; `<br>
-     `} `<br>
+     public TodoItem Find(string key) 
+     { 
+         TodoItem item; 
+         _todos.TryGetValue(key, out item); 
+         return item; 
+     } 
  
-     `public TodoItem Find(string key) `<br>
-     `{ `<br>
-         `TodoItem item; `<br>
-         `_todos.TryGetValue(key, out item); `<br>
-         `return item; `<br>
-     `} `<br>
+     public TodoItem Remove(string key) 
+     { 
+         TodoItem item; 
+         _todos.TryGetValue(key, out item);
+         _todos.TryRemove(key, out item);
+         return item;
+     } 
  
-     `public TodoItem Remove(string key) `<br>
-     `{ `<br>
-         `TodoItem item; `<br>
-         `_todos.TryGetValue(key, out item); `<br>
-         `_todos.TryRemove(key, out item); `<br>
-         `return item; `<br>
-     `} `<br>
- 
-     `public void Update(TodoItem item) `<br>
-     `{ `<br>
-         `_todos[item.Key] = item; `<br>
-    ` } `<br>
- `} `<br>
+     public void Update(TodoItem item) 
+     { 
+         _todos[item.Key] = item; 
+     } 
+ } ```
 <br><br>
 Mở file Startup.cs, thêm dòng sau vô đầu<br>
  <h4>using todoapi.Models;</h4>
@@ -267,8 +268,8 @@ Chuột phải lên thư mục Controller > Add > New Item<br>
 Chọn Web API Controller Class, đặt tên TodoController<br><br>
 <img src="https://i.imgur.com/ustRn46.png"><br><br>
 Xóa hết code trong class đi, thay bằng đoạn code này.<br>
-public class TodoController : Controller<br><br>
-```{
+```public class TodoController : Controller
+{
     public ITodoRepository TodoItems { get; set; }
  
     public TodoController(ITodoRepository todoItems)
