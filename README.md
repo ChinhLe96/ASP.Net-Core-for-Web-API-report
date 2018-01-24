@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+﻿<<<<<<< HEAD
 ﻿<h2>1.Cách sử dụng Postman: biến môi trường, biến sẵn có của postman, import, export. </h2>
 POSTMAN là một App Extensions, cho phép làm việc với các API giúp ích rất nhiều cho việc testing. Hỗ trợ tất cả các phương thức HTTP (GET, POST, PUT, DELETE, OPTIONS, HEAD ...)<br>
 POSTMAN cho phép lưu lại lịch sử các lần request, rất tiện cho việc sử dụng lại khi cần.<br>
@@ -175,5 +175,21 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 | GET |/api/products | GetAllProducts() | 2 x 3 |
 | GET |	/api/products/5 | GetProduct(5) | 3 x 3 |
 | POST |/api/products/ | HTTP Status 405 | 4 x 3 |
-| GET |/api/users/ | HTTP Status 404 | 5 x 3 |
->>>>>>> 5c3e7124c0ab94c772e6cf92312a3239cb538962
+| GET |/api/users/ | HTTP Status 404 | 5 x 3 |<br>
+<h3>6. Entity framework</h3><br>
+Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
+Kiến trúc của Entity Framework được minh họa như sau:<br><br>
+  <img src="https://i.imgur.com/h94vJqK.png"><br><br>
+Đây là các class tự động sinh ra tương ứng với mô hình dữ liệu. Các class này bao gồm:<br>
++ <h4>ObjectContext</h4> đại diện cho một database. ObjectContext có chức năng quản lý các kết nối, định nghĩa mô hình dữ liệu với metadata và thao tác với database. Lớp này cũng có thể thêm vào các phương thức đại diện cho các stored procedure trong database.<br>
++ <h4>ObjectSet<TEntity></h4> là một  một tập hợp các entity. Mỗi đối tượng này tương ứng với một table. Có thể lấy được các đối tượng này thông qua các property tương ứng của ObjectContext.<br>
++ <h4>EntityObject, ComplexObject</h4> là các lớp tương ứng cho một dòng dữ liệu của table trong database. Khác biệt chính giữa hai loại này là ComplexObject không chứa primary key.<br>
++ <h4>EntityCollection<TEntity> và EntityReference<TEntity>:</h4> là các đối tượng thể hiện mối quan hệ (relationship) giữa hai entity class. Mỗi đối tượng này có thể được truy xuất thông qua các property của entity class.<br>
+Để làm việc với Entity Framework một cách hoàn chỉnh chúng ta phải cài thêm Entity Framework bản mới nhất từ NuGet:<br>
+B1. Tạo Project mới<br>
+B2. Cài EF Power Tools vào Visual Studio: Tools -> Library Paskage Manager -> Manage NuGet Packages for Solution…<br><br>
+   <img src="https://i.imgur.com/IMQB2he.png"><br><br>
+Bến trái, chọn Online. Nhập Entity Framework Power Tools vào khung Search (góc trên, bên phải) chọn Entity Framework Power Tools -> Install. <br>
+Khi đã cài được, bạn chuột phải trên tên Project sẽ thấy có menu Entity Framework.
+
+
