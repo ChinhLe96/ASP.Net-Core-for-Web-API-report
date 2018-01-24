@@ -201,15 +201,18 @@ Chuột phải vào Project > Add > New Folder<br><br>
 Tiếp tục chuột phải vào Folder Models > Add > Class, đặt tên class là TodoItem > Ok<br><br>
 <img src="https://i.imgur.com/jKu1HYT.png"><br><br>
 Thêm 3 Property vô<br>
-```public string Key { get; set; }
+
+```
+   public string Key { get; set; }
    public string Name { get; set; }
    public bool IsComplete { get; set; }
 ```
 <h4>Thêm Repository</h4>
 Repository dùng để đóng gói data, và chứa logic cho việc truy cập dữ liệu và chuyển nó qua cho Entity Model.<br>
 Để bắt đầu, chúng ta sẽ tạo một repository interface có tên ITodoRepository, dùng cách thêm class như trên, nhưng chọn template là Interface<br><br>
-namespace todoapi.Models<br>
-```{
+```
+namespace todoapi.Models
+{
     public interface ITodoRepository
     {
       void Add(TodoItem item);
@@ -222,7 +225,8 @@ namespace todoapi.Models<br>
 ```
 interface này định nghĩa các phương thức CRUD (Create – Read – Update – Delete)<br>
 Tiếp theo, ta thêm class TodoRepository, triển khai các phương thức trong Interface mới tạo bên trên<br><br>
- ```public class TodoRepository : ITodoRepository 
+ ```
+public class TodoRepository : ITodoRepository 
  { 
   private static ConcurrentDictionary<string, TodoItem> _todos = new ConcurrentDictionary<string, TodoItem>(); 
      public TodoRepository() 
@@ -257,7 +261,8 @@ Tiếp theo, ta thêm class TodoRepository, triển khai các phương thức tr
      { 
          _todos[item.Key] = item; 
      } 
- } ```
+ }
+ ```
 <br><br>
 Mở file Startup.cs, thêm dòng sau vô đầu<br>
  <h4>using todoapi.Models;</h4>
@@ -268,7 +273,8 @@ Chuột phải lên thư mục Controller > Add > New Item<br>
 Chọn Web API Controller Class, đặt tên TodoController<br><br>
 <img src="https://i.imgur.com/ustRn46.png"><br><br>
 Xóa hết code trong class đi, thay bằng đoạn code này.<br>
-```public class TodoController : Controller
+```
+public class TodoController : Controller
 {
     public ITodoRepository TodoItems { get; set; }
  
@@ -278,9 +284,10 @@ Xóa hết code trong class đi, thay bằng đoạn code này.<br>
     }
 }
 ```
-<br><br>
+
 Ta thử thêm các phương thức sau vào class TodoController<br><br>
-```[HttpGet]
+```
+[HttpGet]
 public IEnumerable<TodoItem> GetAll()
 {
     return _context.TodoItems.ToList();
