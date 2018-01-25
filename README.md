@@ -195,39 +195,6 @@ Thêm 3 Property vô
 ```
 <h4>Thêm Repository</h4>
 
-<<<<<<< HEAD
-Ta thử thêm các phương thức sau vào class TodoController<br>
-[HttpGet]
-public IEnumerable<TodoItem> GetAll()
-{
-    return _context.TodoItems.ToList();
-}
-
-[HttpGet("{id}", Name = "GetTodo")]
-public IActionResult GetById(long id)
-{
-    var item = _context.TodoItems.FirstOrDefault(t => t.Id == id);
-    if (item == null)
-    {
-        return NotFound();
-    }
-    return new ObjectResult(item);
-}
-<br>
-Các phương pháp này thực hiện hai phương pháp GET:<br>
-+ GET /api/todo<br>
-+ GET /api/todo/{id}<br>
-Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br>
-[
-  {
-    "id": 1,
-    "name": "Item1",
-    "isComplete": false
-  }
-]
-<br>
-=======
->>>>>>> 9f54d3f932cae857996752ea27d825d41e8fcb18
 # 6. Entity framework 
 Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
 Kiến trúc của Entity Framework được minh họa như sau:<br><br>
