@@ -305,6 +305,7 @@ Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br>
   }
 ]
 ```
+<br>
 # 6. Entity framework 
 Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
 Kiến trúc của Entity Framework được minh họa như sau:<br><br>
