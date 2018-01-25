@@ -200,7 +200,7 @@ Chuột phải vào Project > Add > New Folder<br><br>
  <img src="https://i.imgur.com/NZ5UfsX.png"><br>
 Tiếp tục chuột phải vào Folder Models > Add > Class, đặt tên class là TodoItem > Ok<br><br>
 <img src="https://i.imgur.com/jKu1HYT.png"><br><br>
-Thêm 3 Property vô<br>
+Thêm 3 Property vô
 
 ```
    public string Key { get; set; }
@@ -224,7 +224,7 @@ namespace todoapi.Models
 }
 ```
 interface này định nghĩa các phương thức CRUD (Create – Read – Update – Delete)<br>
-Tiếp theo, ta thêm class TodoRepository, triển khai các phương thức trong Interface mới tạo bên trên<br><br>
+Tiếp theo, ta thêm class TodoRepository, triển khai các phương thức trong Interface mới tạo bên trên
  ```
 public class TodoRepository : ITodoRepository 
  { 
@@ -263,7 +263,7 @@ public class TodoRepository : ITodoRepository
      } 
  }
  ```
-<br><br>
+
 Mở file Startup.cs, thêm dòng sau vô đầu<br>
  <h4>using todoapi.Models;</h4>
 Trong phương thức configureServices, thêm đoạn code sau vô cuối<br>
@@ -309,7 +309,9 @@ Các phương pháp này thực hiện hai phương pháp GET:<br>
 + GET /api/todo<br>
 + GET /api/todo/{id}<br>
 Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br><br>
-```[
+```
+
+[
   {
     "id": 1,
     "name": "Item1",
