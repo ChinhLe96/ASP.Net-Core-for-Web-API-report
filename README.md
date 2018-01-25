@@ -193,8 +193,7 @@ Thêm 3 Property vô
    public string Name { get; set; }
    public bool IsComplete { get; set; }
 ```
-<h4>Thêm Repository</h4>
-
+<br>
 # 6. Entity framework 
 Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
 Kiến trúc của Entity Framework được minh họa như sau:<br><br>
@@ -223,7 +222,7 @@ Automapper là 1 thư viện mapping object-object. Nó cho phép copy giá tr�
 hoặc đại loại 1 đoạn code copy giá trị tương tự:
 <img src="https://i.imgur.com/nj3bxBv.png">
 <br>
-Automapper cho phép download miễn phí thông qua nuget, bạn có thể sử dụng lệnh sau trong Package Manager Console để cài đặt version mới nhất:**Install-Package AutoMapper**
+Automapper cho phép download miễn phí thông qua nuget, bạn có thể sử dụng lệnh sau trong Package Manager Console để cài đặt version mới nhất:**Install-Package AutoMapper**<br>
 - Cách sử dụng AutoMapper:<br>
 Giả sử bạn có 2 class <br>
 <img src="https://i.imgur.com/skMaAjV.png"><br>
