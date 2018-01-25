@@ -1,5 +1,5 @@
 ﻿
-﻿<h2>1.Cách sử dụng Postman: biến môi trường, biến sẵn có của postman, import, export. </h2>
+# 1.Cách sử dụng Postman: biến môi trường, biến sẵn có của postman, import, export. 
 POSTMAN là một App Extensions, cho phép làm việc với các API giúp ích rất nhiều cho việc testing. Hỗ trợ tất cả các phương thức HTTP (GET, POST, PUT, DELETE, OPTIONS, HEAD ...)<br>
 POSTMAN cho phép lưu lại lịch sử các lần request, rất tiện cho việc sử dụng lại khi cần.<br>
 <h3>Cài đặt </h3>
@@ -173,22 +173,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 | GET |	/api/products/5 | GetProduct(5) | 3 x 3 |
 | POST |/api/products/ | HTTP Status 405 | 4 x 3 |
 | GET |/api/users/ | HTTP Status 404 | 5 x 3 |<br>
-<h3>6. Entity framework</h3><br>
-Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
-Kiến trúc của Entity Framework được minh họa như sau:<br><br>
-  <img src="https://i.imgur.com/h94vJqK.png"><br><br>
-Đây là các class tự động sinh ra tương ứng với mô hình dữ liệu. Các class này bao gồm:<br>
-+ ObjectContext đại diện cho một database. ObjectContext có chức năng quản lý các kết nối, định nghĩa mô hình dữ liệu với metadata và thao tác với database. Lớp này cũng có thể thêm vào các phương thức đại diện cho các stored procedure trong database.<br>
-+ ObjectSet<TEntity>là một  một tập hợp các entity. Mỗi đối tượng này tương ứng với một table. Có thể lấy được các đối tượng này thông qua các property tương ứng của ObjectContext.<br>
-+ EntityObject, ComplexObject là các lớp tương ứng cho một dòng dữ liệu của table trong database. Khác biệt chính giữa hai loại này là ComplexObject không chứa primary key.<br>
-+ EntityCollection<TEntity> và EntityReference<TEntity>: là các đối tượng thể hiện mối quan hệ (relationship) giữa hai entity class. Mỗi đối tượng này có thể được truy xuất thông qua các property của entity class.<br>
-Để làm việc với Entity Framework một cách hoàn chỉnh chúng ta phải cài thêm Entity Framework bản mới nhất từ NuGet:<br>
-B1. Tạo Project mới<br>
-B2. Cài EF Power Tools vào Visual Studio: Tools -> Library Paskage Manager -> Manage NuGet Packages for Solution…<br><br>
-   <img src="https://i.imgur.com/IMQB2he.png"><br><br>
-Bến trái, chọn Online. Nhập Entity Framework Power Tools vào khung Search (góc trên, bên phải) chọn Entity Framework Power Tools -> Install. <br>
-Khi đã cài được, bạn chuột phải trên tên Project sẽ thấy có menu Entity Framework.
-<h3>5.Tạo database bằng code.</h3>
+
+# 5.Tạo database bằng code
 <h4>Khởi tạo Project</h4>
 Tạo mới 1 project, chọn template là ASP.NET Core Web Application (.NET Core), đặt tên là TodoApi và chọn OK<br><br>
    <img src="https://i.imgur.com/XNAR1Cp.png"><br>
@@ -319,5 +305,51 @@ Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br>
   }
 ]
 ```
+# 6. Entity framework 
+Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
+Kiến trúc của Entity Framework được minh họa như sau:<br><br>
+  <img src="https://i.imgur.com/h94vJqK.png"><br><br>
+Đây là các class tự động sinh ra tương ứng với mô hình dữ liệu. Các class này bao gồm:<br>
++ ObjectContext đại diện cho một database. ObjectContext có chức năng quản lý các kết nối, định nghĩa mô hình dữ liệu với metadata và thao tác với database. Lớp này cũng có thể thêm vào các phương thức đại diện cho các stored procedure trong database.<br>
++ ObjectSet<TEntity>là một  một tập hợp các entity. Mỗi đối tượng này tương ứng với một table. Có thể lấy được các đối tượng này thông qua các property tương ứng của ObjectContext.<br>
++ EntityObject, ComplexObject là các lớp tương ứng cho một dòng dữ liệu của table trong database. Khác biệt chính giữa hai loại này là ComplexObject không chứa primary key.<br>
++ EntityCollection<TEntity> và EntityReference<TEntity>: là các đối tượng thể hiện mối quan hệ (relationship) giữa hai entity class. Mỗi đối tượng này có thể được truy xuất thông qua các property của entity class.<br>
+Để làm việc với Entity Framework một cách hoàn chỉnh chúng ta phải cài thêm Entity Framework bản mới nhất từ NuGet:<br>
+B1. Tạo Project mới<br>
+B2. Cài EF Power Tools vào Visual Studio: Tools -> Library Paskage Manager -> Manage NuGet Packages for Solution…<br><br>
+   <img src="https://i.imgur.com/IMQB2he.png"><br><br>
+Bến trái, chọn Online. Nhập Entity Framework Power Tools vào khung Search (góc trên, bên phải) chọn Entity Framework Power Tools -> Install. <br>
+Khi đã cài được, bạn chuột phải trên tên Project sẽ thấy có menu Entity Framework.
+
+# 7 Auto Mapping
+- Auto Mapper là gì ?
+<br>
+Automapper là 1 thư viện mapping object-object. Nó cho phép copy giá trị từ 2 object có các property (thuộc tính) giống tên nhau - không phân biệt hoa thường. Hơn thế nữa, nó còn có thể map các property giống tên nhưng khác kiểu dữ liệu(*) và cho phép bạn custom việc chuyển đổi giữa các property theo ý mình.
+<br>
+- Vì sao phải sử dụng AutoMapper:
+<br>
+<img src="https://i.imgur.com/NTBrnIy.png">
+<br>
+hoặc đại loại 1 đoạn code copy giá trị tương tự:
+<img src="https://i.imgur.com/nj3bxBv.png">
+<br>
+Automapper cho phép download miễn phí thông qua nuget, bạn có thể sử dụng lệnh sau trong Package Manager Console để cài đặt version mới nhất:**Install-Package AutoMapper**
+- Cách sử dụng AutoMapper:<br>
+Giả sử bạn có 2 class <br>
+<img src="https://i.imgur.com/skMaAjV.png"><br>
+Và đây là mã trong phương pháp ConfigureServices.<br>
+<img src="https://i.imgur.com/ka89DIq.png"><br>
+Bạn có thể ánh xạ các lớp bằng cách sử dụng phương pháp Map của đối tượng Mapper. Để sử dụng đối tượng Mapper trong bộ điều khiển, bạn có thể chèn nó bằng cách sử dụng sự phụ thuộc của ASP.NET Core.<br>
+<img src="https://i.imgur.com/69B6Tg7.png"><br>
+Đây là ảnh chụp màn hình của bản đồ sử dụng Automapper.<br>
+<img src="https://i.imgur.com/doYJD46.png"><br>
+Đây là việc triển khai lớp hồ sơ, tương tự như thực hiện hiện tại ngoại trừ tất cả các ánh xạ sẽ nằm trong lớp này.<br>
+<img src="https://i.imgur.com/lYolPCX.png"><br>
+Và bạn có thể sử dụng nó như thế này trong lớp Startup.<br>
+<img src="https://i.imgur.com/kamaYyz.png"><br>
+
+
+
+
 
 
