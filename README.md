@@ -271,8 +271,7 @@ public class TodoController : Controller
 }
 ```
 
-Ta thử thêm các phương thức sau vào class TodoController<br><br>
-```
+Ta thử thêm các phương thức sau vào class TodoController<br>
 [HttpGet]
 public IEnumerable<TodoItem> GetAll()
 {
@@ -289,14 +288,11 @@ public IActionResult GetById(long id)
     }
     return new ObjectResult(item);
 }
-```
-<br><br>
+<br>
 Các phương pháp này thực hiện hai phương pháp GET:<br>
 + GET /api/todo<br>
 + GET /api/todo/{id}<br>
-Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br><br>
-```
-
+Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br>
 [
   {
     "id": 1,
@@ -304,7 +300,6 @@ Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br>
     "isComplete": false
   }
 ]
-```
 <br>
 # 6. Entity framework 
 Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
