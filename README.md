@@ -194,83 +194,8 @@ Thêm 3 Property vô
    public bool IsComplete { get; set; }
 ```
 <h4>Thêm Repository</h4>
-Repository dùng để đóng gói data, và chứa logic cho việc truy cập dữ liệu và chuyển nó qua cho Entity Model.<br>
-Để bắt đầu, chúng ta sẽ tạo một repository interface có tên ITodoRepository, dùng cách thêm class như trên, nhưng chọn template là Interface<br><br>
-```
-namespace todoapi.Models
-{
-    public interface ITodoRepository
-    {
-      void Add(TodoItem item);
-      IEnumerable<TodoItem> GetAll();
-       TodoItem Find(string key);
-      TodoItem Remove(string key);
-       void Update(TodoItem item);
-    }
-}
-```
-interface này định nghĩa các phương thức CRUD (Create – Read – Update – Delete)<br>
-Tiếp theo, ta thêm class TodoRepository, triển khai các phương thức trong Interface mới tạo bên trên
- ```
-public class TodoRepository : ITodoRepository 
- { 
-  private static ConcurrentDictionary<string, TodoItem> _todos = new ConcurrentDictionary<string, TodoItem>(); 
-     public TodoRepository() 
-     { 
-         Add(new TodoItem { Name = "Item1" }); 
-     } public void Add(TodoItem item) 
-     { 
-         item.Key = Guid.NewGuid().ToString(); 
-         _todos[item.Key] = item; 
-     } 
-     public IEnumerable<TodoItem> GetAll() 
-     { 
-         return _todos.Values;
-     } 
- 
-     public TodoItem Find(string key) 
-     { 
-         TodoItem item; 
-         _todos.TryGetValue(key, out item); 
-         return item; 
-     } 
- 
-     public TodoItem Remove(string key) 
-     { 
-         TodoItem item; 
-         _todos.TryGetValue(key, out item);
-         _todos.TryRemove(key, out item);
-         return item;
-     } 
- 
-     public void Update(TodoItem item) 
-     { 
-         _todos[item.Key] = item; 
-     } 
- }
- ```
 
-Mở file Startup.cs, thêm dòng sau vô đầu<br>
- <h4>using todoapi.Models;</h4>
-Trong phương thức configureServices, thêm đoạn code sau vô cuối<br>
- <h4> services.AddSingleton<ITodoRepository, TodoRepository>();</h4>
-<h3>Thêm controller</h3>
-Chuột phải lên thư mục Controller > Add > New Item<br>
-Chọn Web API Controller Class, đặt tên TodoController<br><br>
-<img src="https://i.imgur.com/ustRn46.png"><br><br>
-Xóa hết code trong class đi, thay bằng đoạn code này.<br>
-```
-public class TodoController : Controller
-{
-    public ITodoRepository TodoItems { get; set; }
- 
-    public TodoController(ITodoRepository todoItems)
-    {
-        TodoItems = todoItems;
-    }
-}
-```
-
+<<<<<<< HEAD
 Ta thử thêm các phương thức sau vào class TodoController<br>
 [HttpGet]
 public IEnumerable<TodoItem> GetAll()
@@ -301,6 +226,8 @@ Dưới đây là ví dụ về phản hồi HTTP cho GetAllphương thức:<br>
   }
 ]
 <br>
+=======
+>>>>>>> 9f54d3f932cae857996752ea27d825d41e8fcb18
 # 6. Entity framework 
 Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
 Kiến trúc của Entity Framework được minh họa như sau:<br><br>
