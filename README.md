@@ -194,7 +194,9 @@ Thêm 3 Property vô
    public bool IsComplete { get; set; }
 ```
 <br>
-# 6. Entity framework 
+
+# 6. Entity framework <br>
+
 Entity Framework là một bộ ánh xạ đối tượng – quan hệ cho phép người lập trình .NET  làm việc với dữ liệu quan hệ qua các đối tượng (object) nó giúp lập trình viên không cần viết mã cho (hầu hết) những gì liên quan đến truy cập dữ liệu. <br>
 Kiến trúc của Entity Framework được minh họa như sau:<br><br>
   <img src="https://i.imgur.com/h94vJqK.png"><br><br>
