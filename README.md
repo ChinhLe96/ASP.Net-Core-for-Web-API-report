@@ -90,6 +90,7 @@ Hoặc:
 ![new_controller](https://user-images.githubusercontent.com/35052781/35286103-a2249d52-0091-11e8-9736-ca5d7c6bf247.png)
   
   + Bước 2: Thay thế Class bằng mã code sau:
+  
 ```
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -116,11 +117,11 @@ namespace TodoApi.Controllers
     }
 }
 ```
-   + Bước 3: Thêm các phương thức GET, PUT, PUSH, DELETE,..vào controller vừa tạo và sử dụng nó.
+  + Bước 3: Thêm các phương thức GET, PUT, PUSH, DELETE,..vào controller vừa tạo và sử dụng nó.
   
- - Ví dụ: 
-   + Phương thức GET:
-  ```
+- Ví dụ: 
+  + Phương thức GET:
+```
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -138,9 +139,9 @@ namespace TodoApi.Controllers
             }
             return new ObjectResult(item);
         }
-  ```
-   + Phương thức POST: 
-  ``` 
+```
+  + Phương thức POST: 
+``` 
         [HttpPost]
         public async Task<IActionResult> CreateProductAsync([FromBody] ProductForCreationDto productForCreationDto)
         {
@@ -165,9 +166,9 @@ namespace TodoApi.Controllers
             }
 
         }
-   ```
-    + Phương thức PUT:
-   ```
+```
+   + Phương thức PUT:
+```
         [HttpPut("{id}")]
         public IActionResult Update(Guid id, [FromBody] ProductEntity item)
         {
@@ -190,9 +191,9 @@ namespace TodoApi.Controllers
             _context.SaveChanges();
             return new NoContentResult();
         }
-   ```
-    + Phương thức DELETE:
-   ```
+```
+  + Phương thức DELETE:
+```
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
@@ -212,7 +213,7 @@ namespace TodoApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-   ```
+```
    
 # 3. Giới thiệu về file startup.cs trong ASP.Net Core của Web API
 - File Startup.cs là một cách nâng cao để khởi động ứng dụng của bạn, và bây giờ là một phần không thể tách rời của ASP.NET Core
