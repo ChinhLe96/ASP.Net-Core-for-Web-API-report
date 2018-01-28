@@ -222,7 +222,7 @@ Automapper là 1 thư viện mapping object-object. Nó cho phép copy giá tr�
 hoặc đại loại 1 đoạn code copy giá trị tương tự:
 <img src="https://i.imgur.com/nj3bxBv.png">
 <br>
-Automapper cho phép download miễn phí thông qua nuget, bạn có thể sử dụng lệnh sau trong Package Manager Console để cài đặt version mới nhất:**Install-Package AutoMapper**<br>
+Automapper cho phép download miễn phí thông qua nuget, bạn có thể sử dụng lệnh sau trong Package Manager Console để cài đặt version mới nhất: **Install-Package AutoMapper** <br>
 - Cách sử dụng AutoMapper:<br>
 Giả sử bạn có 2 class <br>
 <img src="https://i.imgur.com/skMaAjV.png"><br>
@@ -237,8 +237,29 @@ Bạn có thể ánh xạ các lớp bằng cách sử dụng phương pháp Map
 Và bạn có thể sử dụng nó như thế này trong lớp Startup.<br>
 <img src="https://i.imgur.com/kamaYyz.png"><br>
 
+# 8 Vai trò của Controller, Repository, Entity, Model
+- Mô hình MVC là mô hình kiến trúc phần mềm với 3 thành phần Models, Views, và Controller. Khi sử dụng mô hình này, yêu cầu người dùng sẽ được chuyển đến (routed) một Controller, Controller này có trách nhiệm làm việc với Model để thực hiện các hành động của người dùng và có thể lấy kết quả của các câu truy vấn. Controller sẽ chọn View tương ứng để hiển thị cho người dùng, và cung cấp cho cho nó với bất kỳ dữ liệu của Model mà nó đòi hỏi. 
+<br>
+<img src="https://i.imgur.com/bT59Cre.png"><br>
+- Chức năng của Model<br>
+Chứa tất cả các nghiệp vụ logic, các phương thức xử lý, truy xuất database, những đối tượng mô tả dữ liệu như Class, hàm xử lý
+<br>
+- Chức năng của Controller<br>
+Controller là thành phần xử lý tương tác người dùng, làm việc với các Model, và cuối cùng là chọn một View để hiển thị. Trong một ứng dụng MVC, View chỉ để hiển thị thông tin, Controller xử lý và phản ứng và tương tác với người dùng. Trong mô hình MVC, Controller là điểm khởi đầu, có trách nhiệm lựa chọn các Model để làm việc và View để hiển thị
+<br>
+### Entity framework
+Entity Framework hỗ trợ 3 cách làm việc với cơ sở dữ liệu Database First, Model First, Code First, cụ thể theo 4 workflow như sau:
 
+- Database First: Trong trường hợp bạn muốn làm việc với database đã có sẵn. Sử dụng công cụ thiết kế có sẵn trong Visual Studio kết nối database sẽ giúp ta tạo ra các model bao gồm lớp và thuộc tính . Các thông tin về cấu trúc dữ liệu của bạn (Store Schema), mô hình dữ liệu (Conceptual Model), và mối quan hệ giữa chúng được lưu trữ dưới dạng XML trong một tập tin .edmx. Entity Framework cung cấp một giao diện hiển thị và chỉnh sửa các tập tin .edmx.
+- Model First: Trong trường hợp này, chúng ta sử dụng các thiết kế Entity Framework trong Visual Studio tạo ra model trong một tập tin .edmx. Dùng công cụ để generated code từ bản thiết kế model ra database.
+- Code First: Riêng với cách này có 2 lựa chọn, làm việc với database có sẵn hoặc sẽ tạo mới. Nhưng dù làm với cách nào, chúng ta cũng dùng codebehind để xử lý là chính. Không dùng các tool, giao diện trực quan giống như 2 cách bên trên.
+Việc lựa chọn workflow  phù hợp cho chương trình của bạn phụ thuộc vào câu trả lời cho hai câu hỏi sau:
+Câu hỏi 1: Bạn tạo sẵn cơ sở dữ liệu với các bảng hay chưa?
+Câu hỏi 2: Bạn muốn tạo các Model theo cách viết code hay dựa vào giao diện thiết kế?
+Trong quy trình xây dựng ứng dụng, thông thường cơ sở dữ liệu sẽ được xây dựng trước việc này có thể do nhân viên phân tích thiết kế chuyên về cơ sở dữ liệu làm hay với các ứng dụng đơn giản hơn thì lập trình viên thực hiện. Sau đó tùy theo yêu cầu phát sinh trong quá trình thực hiện hay từ khách hàng mà ta điều chỉnh cơ sở dữ liệu này. Vậu câu trả lời cho  câu hỏi 1 thông thường là có.
+Câu trả lời cho câu hỏi  hai thì tùy vào lập trình vên với các ứng dụng đơn giản nhanh thì có thể thiết kế model theo giao diện, nếu lập trình viên cần kiểm soát chặt chẽ code của chương trình thì việc code model bằng tay được thược hiện.
 
-
+### Repository
+- đơn giản là một lớp trung gian giữa tầng business và tầng truy xuất dữ liệu. Nếu bạn sử dụng Entity Framework trong ASP.NET Core MVC hay trong ASP.NET MVC thì business là tầng xử lý nghiệp vụ của dự án, còn Data chính là tầng dùng để chứa các lớp DbContext và các class entity. Ở trong ASP.NET thì repository sẽ được sử dụng để nhằm điều chỉnh dữ liệu trước khi dữ liệu được truyền lên business logic hoặc truyền xuống tầng data
 
 
