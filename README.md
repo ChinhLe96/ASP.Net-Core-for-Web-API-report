@@ -90,6 +90,7 @@ Hoặc:
 ![new_controller](https://user-images.githubusercontent.com/35052781/35286103-a2249d52-0091-11e8-9736-ca5d7c6bf247.png)
   
   + Bước 2: Thay thế Class bằng mã code sau:
+  
 ```
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
@@ -116,7 +117,103 @@ namespace TodoApi.Controllers
     }
 }
 ```
-   + Bước 3: Thêm các phương thức GET, PUT, PUSH, DELETE,..vào controller vừa tạo và sử dụng nó.
+  + Bước 3: Thêm các phương thức GET, PUT, PUSH, DELETE,..vào controller vừa tạo và sử dụng nó.
+  
+- Ví dụ: 
+  + Phương thức GET:
+```
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var products = await _context.Products.Include(p => p.ProductCategory).ToArrayAsync();
+            return Ok(products);
+
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var item = _context.Products.Include(p => p.ProductCategory).FirstOrDefault(t => t.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(item);
+        }
+```
+  + Phương thức POST: 
+``` 
+        [HttpPost]
+        public async Task<IActionResult> CreateProductAsync([FromBody] ProductForCreationDto productForCreationDto)
+        {
+            ProductEntity productEntity = new ProductEntity
+            {
+                Name = productForCreationDto.Name,
+                ProductCategoryId = productForCreationDto.ProductCategoryId
+
+            };
+            try
+            {
+                await _context.Products.AddAsync(productEntity);
+
+                await _context.SaveChangesAsync();
+
+                return Created("", productEntity.Id);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+```
+   + Phương thức PUT:
+```
+        [HttpPut("{id}")]
+        public IActionResult Update(Guid id, [FromBody] ProductEntity item)
+        {
+            if (item == null || item.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var pro = _context.Products.Include(p => p.ProductCategory).FirstOrDefault(t => t.Id == id);
+            if (pro == null)
+            {
+                return NotFound();
+            }
+
+            pro.Name = item.Name;
+            //pro.ProductCategoryId = item.ProductCategoryId;
+            //pro.ProductCategory = item.ProductCategory;
+
+            _context.Products.Update(pro);
+            _context.SaveChanges();
+            return new NoContentResult();
+        }
+```
+  + Phương thức DELETE:
+```
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                var todo = _context.Products.FirstOrDefault(t => t.Id == id);
+                if (todo == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Products.Remove(todo);
+                _context.SaveChanges();
+                return new NoContentResult();
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+```
    
 # 3. Giới thiệu về file startup.cs trong ASP.Net Core của Web API
 - File Startup.cs là một cách nâng cao để khởi động ứng dụng của bạn, và bây giờ là một phần không thể tách rời của ASP.NET Core
